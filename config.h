@@ -8,16 +8,16 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "wqy-zenhei:size=11" };
 static const char dmenufont[]       = "Source Code Pro:size=11";
-static const char col_gray1[]       = "#fdf1c7";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#ebdbb2";
-static const char col_gray3[]       = "#3c3836";
+static const char col_gray3[]       = "#ffffff";
 static const char col_gray4[]       = "#282828";
 static const char col_gray5[]       = "#ffffff";
 static const char col_gray6[]       = "#b9b8b1";
-static const char col_cyan[]        = "#fabd2f";
+static const char col_cyan[]        = "#d1d1d1";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
