@@ -9,13 +9,15 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char *fonts[]          = { "wqy-zenhei:size=11" };
+static const char dmenufont[]       = "Source Code Pro:size=11";
+static const char col_gray1[]       = "#fdf1c7";
+static const char col_gray2[]       = "#ebdbb2";
+static const char col_gray3[]       = "#3c3836";
+static const char col_gray4[]       = "#282828";
+static const char col_gray5[]       = "#ffffff";
+static const char col_gray6[]       = "#b9b8b1";
+static const char col_cyan[]        = "#fabd2f";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
@@ -38,8 +40,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       0,			      1,           -1 },
+	{ "Thunar",   NULL,       NULL,       0,						1,           -1 },
 };
 
 /* layout(s) */
@@ -49,9 +51,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "平铺",      tile },    /* first entry is default */
+	{ "浮动",      NULL },    /* no layout function means floating behavior */
+	{ "单页",      monocle },
 };
 
 /* key definitions */
@@ -68,12 +70,59 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+/*终端*/
 static const char *termcmd[]  = { "st", NULL };
+static const char *thunarcmd[]  = { "thunar", NULL };
+
+/*自定义快捷*/
+static const char *browsercmd[]  = { "firefox", NULL };
+static const char *flameshot[] = { "flameshot", "gui", "-p", "/home/rewrite/Desktop/Screenshot", NULL };
+static const char *lock[] = { "slock", NULL };
+/*音量控制*/
+static const char *volup[]   = { "vol-up.sh",  NULL };
+static const char *voldown[] = { "vol-down.sh",  NULL };
+static const char *volmute[] = { "vol-toggle.sh",  NULL };
+/*亮度控制*/
+static const char *lightup[] = { "light-up.sh",  NULL };
+static const char *lightdown[] = { "light-down.sh",  NULL };
+/*壁纸切换*/
+static const char *bgnext[] = { "pkill", "sleep", NULL };
+/*cmus控制*/
+static const char *mplay[] = { "cmus_control.sh", "play", NULL };
+static const char *mquit[] = { "cmus_control.sh", "quit", NULL };
+static const char *mnext[] = { "cmus-remote", "--next", NULL };
+static const char *mprev[] = { "cmus-remote", "--prev", NULL };
+static const char *mpause[] = { "cmus-remote", "--pause", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	/*壁纸切换*/
+	{ MODKEY|Mod4Mask,							XK_n,									  spawn,          {.v = bgnext } },
+	/*dmenu*/                                           
+	{ ShiftMask,                    XK_space,							  spawn,          {.v = dmenucmd } },
+	/*终端*/                                            
+	{ MODKEY,											  XK_Return,						  spawn,          {.v = termcmd } },
+	/*thunar*/
+	{ MODKEY,              		      XK_f,                   spawn,          {.v = thunarcmd } },
+	/*chromium*/
+	{ MODKEY,              		      XK_c,                   spawn,          {.v = browsercmd } },
+	/*锁屏*/
+	{ MODKEY|Mod4Mask,              XK_l,                   spawn,          {.v = lock } },
+	/*截图*/
+	{ ControlMask|Mod1Mask,		      XK_a,									  spawn,	        {.v = flameshot } },
+	/*cmus控制*/
+	{ ControlMask|Mod4Mask,		      XK_p,									  spawn,	        {.v = mplay } },
+	{ ControlMask|Mod4Mask,		      XK_space,								spawn,	        {.v = mpause } },
+	{ ControlMask|Mod4Mask,		      XK_n,									  spawn,	        {.v = mnext } },
+	{ ControlMask|Mod4Mask,		      XK_u,									  spawn,	        {.v = mprev } },
+	{ ControlMask|Mod4Mask,		      XK_q,									  spawn,	        {.v = mquit } },
+	/*音量控制*/
+	{ MODKEY,                       XK_bracketleft,         spawn,          {.v = voldown } },
+	{ MODKEY,                       XK_backslash,           spawn,          {.v = volmute } },
+	{ MODKEY,                       XK_bracketright,        spawn,          {.v = volup   } },
+	/*亮度控制*/
+	{ Mod4Mask,                     XK_bracketleft,         spawn,          {.v = lightdown } },
+	{ Mod4Mask,						  				XK_bracketright,        spawn,          {.v = lightup   } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
