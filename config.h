@@ -133,7 +133,7 @@ static Key keys[] = {
 	/*窗口显示*/                                              
 	{ MODKEY|ControlMask,           XK_h,		                restorewin,     {0} },
 	/*状态栏显示隐藏*/
-	{ MODKEY,                       XK_b,		                togglebar,      {0} },
+	{ Mod4Mask,                     XK_b,		                togglebar,      {0} },
 	/*平铺窗口位置调整*/                                      
 	{ ShiftMask|MODKEY,		      		XK_j,		                rotatestack,    {.i = +1 } },
 	{ ShiftMask|MODKEY,			      	XK_k,		                rotatestack,    {.i = -1 } },
