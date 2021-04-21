@@ -72,9 +72,11 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *termcmd[]  = { "st", NULL };
+
 static const char *thunarcmd[]  = { "thunar", NULL };
 /*自定义快捷*/
 static const char *browsercmd[]  = { "firefox", NULL };
@@ -131,34 +133,55 @@ static Key keys[] = {
 	{ Mod4Mask,                     XK_h,		                hidewin,        {0} },
 	/*窗口显示*/                                              
 	{ MODKEY|ControlMask,           XK_h,		                restorewin,     {0} },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_f,      fullscreen,     {0} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_Left,   viewtoleft,     {0} },
-	{ MODKEY,                       XK_Right,  viewtoright,    {0} },
-	{ MODKEY|ShiftMask,             XK_Left,   tagtoleft,      {0} },
-	{ MODKEY|ShiftMask,             XK_Right,  tagtoright,     {0} },
+	/*状态栏显示隐藏*/
+	{ MODKEY,                       XK_b,		                togglebar,      {0} },
+	/*平铺窗口位置调整*/                                      
+	{ ShiftMask|MODKEY,		      		XK_j,		                rotatestack,    {.i = +1 } },
+	{ ShiftMask|MODKEY,			      	XK_k,		                rotatestack,    {.i = -1 } },
+	/*更改活动窗口*/                                          
+	{ Mod4Mask,                     XK_j,		                focusstack,     {.i = +1 } },
+	{ Mod4Mask,                     XK_k,		                focusstack,     {.i = -1 } },
+	/*更改平铺排列方式*/                                      
+	{ MODKEY,                       XK_n,		                incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_m,		                incnmaster,     {.i = -1 } },
+	/*平铺窗口大小调整*/                                      
+	{ MODKEY,                       XK_h,		                setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_l,		                setmfact,       {.f = +0.05} },
+	/*互换窗口位置*/                                     
+	{ Mod4Mask,                     XK_Return,	            zoom,           {0} },
+	/*将所有标签页中的窗口显示到当前页*/                  
+	{ MODKEY,                       XK_Tab,                 view,           {.ui = ~0 } },
+	/*恢复原样*/                                          
+	{ MODKEY|ShiftMask,             XK_Tab,                 view,           {0} },
+	/*关闭窗口*/                                         
+	{ MODKEY,		                    XK_q,		                killclient,     {0} },
+	/*设置布局模式*/                                     
+	/*设为平铺模式*/                                     
+	{ Mod4Mask,                     XK_p,                  setlayout,      {.v = &layouts[0]} },
+	/*设为浮动模式*/                                     
+	{ Mod4Mask,                     XK_f,                  setlayout,      {.v = &layouts[1]} },
+	/*设为单页模式*/                                     
+	{ Mod4Mask,                     XK_m,                  setlayout,      {.v = &layouts[2]} },
+	/*切换布局模式*/                                     
+	{ MODKEY,                       XK_space,              setlayout,      {0} },
+	/*窗口全屏*/
+	{ MODKEY,												XK_f,										fullscreen,     {0} },
+	/*切换浮动*/                                         
+	{ MODKEY|ShiftMask,             XK_space,	             togglefloating, {0} },
+	/*显示所有tag*/
+	{ MODKEY|ShiftMask,             XK_0,		               tag,            {.ui = ~0 } },
+	/*切换聚焦显示器*/
+	{ MODKEY,                       XK_comma,	             focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period,	           focusmon,       {.i = +1 } },
+	/*将内容转移到其他显示器*/
+	{ MODKEY|ShiftMask,             XK_comma,	             tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period,	           tagmon,         {.i = +1 } },
+	/*切换相邻标签*/
+	{ Mod4Mask,                    	XK_1,                  viewtoleft,     {0} },
+	{ Mod4Mask,                    	XK_2,                  viewtoright,    {0} },
+	/*将窗口移动到相邻标签*/
+	{ MODKEY|ShiftMask,             XK_Left,               tagtoleft,      {0} },
+	{ MODKEY|ShiftMask,             XK_Right,              tagtoright,     {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -168,7 +191,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask,           XK_q,							     quit,           {0} },
 };
 
 /* button definitions */
