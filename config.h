@@ -127,6 +127,10 @@ static Key keys[] = {
 	/*亮度控制*/
 	{ Mod4Mask,                     XK_bracketleft,         spawn,          {.v = lightdown } },
 	{ Mod4Mask,						  				XK_bracketright,        spawn,          {.v = lightup   } },
+	/*窗口隐藏*/                                              
+	{ Mod4Mask,                     XK_h,		                hidewin,        {0} },
+	/*窗口显示*/                                              
+	{ MODKEY|ControlMask,           XK_h,		                restorewin,     {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
