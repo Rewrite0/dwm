@@ -12,7 +12,7 @@ play() {
 }
 
 quit() {
-	tmux send-keys -t cmus "cqy"
+	tmux send-keys -t cmus "qy"
 	tmux kill-session -t cmus
 	setsid xss-lock slock
 }
