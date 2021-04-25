@@ -12,7 +12,7 @@ next(){
 	echo 'pt_step down' > /tmp/wallpaper
 }
 quit(){
-	killall xwinwarp
+	killall xwinwrap
 }
 volup(){
 	echo 'volume +10%' > /tmp/wallpaper
@@ -23,7 +23,14 @@ voldown(){
 voloff(){
 	echo 'volume 0 1' > /tmp/wallpaper
 }
-echo $1 > /tmp/wallpaper
+helpme(){
+	echo 'puase - 暂停'
+	echo 'next  - 下一个'
+	echo 'vup   - 音量加'
+	echo 'vdown - 音量减'
+	echo 'voff  - 静音'
+	echo 'quit  - 退出'
+}
 
 if [ $command == puase ];then
 	pause
@@ -31,10 +38,12 @@ elif [ $command == next ];then
 	next
 elif [ $command == quit ];then
 	quit
-elif [ $command == volup ];then
+elif [ $command == vup ];then
 	volup	
-elif [ $command == voldown ];then
+elif [ $command == vdown ];then
 	voldown
-elif [ $command == voloff ];then
+elif [ $command == voff ];then
 	voloff
+elif [ $command == help ];then
+	helpme
 fi
