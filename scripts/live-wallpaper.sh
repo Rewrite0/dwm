@@ -3,10 +3,10 @@ STA=`xrandr | grep 1366x768+1920+0`
 one(){
 # 单屏
 # mplayer
-#nohup xwinwrap -fs -nf -ov -- mplayer -af volume=-200 -softvol -softvol-max 200 -slave -quiet -input file=/tmp/wallpaper -loop 0 -wid WID -nolirc `find ~/Videos/live_wallpaper -type f` > /tmp/log/xwinwrap.log 2>&1 &
+nohup xwinwrap -fs -nf -ov -- mplayer -af volume=-200 -softvol -softvol-max 200 -slave -quiet -input file=/tmp/wallpaper -loop 0 -wid WID -nolirc `find ~/Videos/live_wallpaper -type f` > /tmp/log/xwinwrap.log 2>&1 &
 
 # mpv
-nohup xwinwrap -ni -s -st -sp -b -nf -ov -- mpv --volume=0 --input-ipc-server=/tmp/wallpaper --idle -wid WID --shuffle ~/Videos/live_wallpaper > /tmp/log/xwinwrap.log 2>&1 &
+#nohup xwinwrap -ni -s -st -sp -b -nf -ov -- mpv --volume=0 --input-ipc-server=/tmp/wallpaper --idle -wid WID --shuffle ~/Videos/live_wallpaper > /tmp/log/xwinwrap.log 2>&1 &
 }
 
 two(){
