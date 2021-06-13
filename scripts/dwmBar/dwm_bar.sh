@@ -34,7 +34,7 @@ export SEP2="]"
 . "$DIR/bar-functions/dwm_backlight.sh"
 . "$DIR/bar-functions/dwm_alsa.sh"
 #. "$DIR/bar-functions/dwm_pulse.sh"
-#. "$DIR/bar-functions/dwm_weather.sh"
+. "$DIR/bar-functions/dwm_weather.sh"
 #. "$DIR/bar-functions/dwm_vpn.sh"
 #. "$DIR/bar-functions/dwm_networkmanager.sh"
 #. "$DIR/bar-functions/dwm_keyboard.sh"
@@ -45,16 +45,16 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_loadavg.sh"
 #. "$DIR/bar-functions/dwm_currency.sh"
 
-#parallelize() {
-    #while true
-    #do
-        #printf "Running parallel processes\n"
-        #dwm_weather &
+parallelize() {
+		while true
+		do
+				printf "Running parallel processes\n"
+				dwm_weather &
 				#dwm_networkmanager &
-        #sleep 5
-    #done
-#}
-#parallelize &
+				sleep 5
+		done
+}
+parallelize &
 
 # Update dwm status bar every second
 while true
@@ -72,9 +72,9 @@ do
 		#dispstr="$dispstr$(dwm_resources)"
     #dispstr="$dispstr$(dwm_mail)"
     #dispstr="$dispstr$(dwm_pulse)"
-    #dispstr="$dispstr${__DWM_BAR_WEATHER__}"
+		dispstr="$dispstr${__DWM_BAR_WEATHER__}"
     #dispstr="$dispstr$(dwm_vpn)"
-    #dispstr="$dispstr${__DWM_BAR_NETWORKMANAGER__}"
+		#dispstr="$dispstr${__DWM_BAR_NETWORKMANAGER__}"
     dispstr="$dispstr$(dwm_battery)"
 		dispstr="$dispstr$(dwm_backlight)"
     dispstr="$dispstr$(dwm_alsa)"
