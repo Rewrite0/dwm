@@ -51,7 +51,7 @@ parallelize() {
 				printf "Running parallel processes\n"
 				dwm_weather &
 				#dwm_networkmanager &
-				sleep 5
+				sleep 3600s
 		done
 }
 parallelize &

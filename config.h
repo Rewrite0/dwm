@@ -44,7 +44,7 @@ static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       0,			      1,           -1 },
 	{ "Thunar",   NULL,       NULL,       0,						1,           -1 },
 	{ "Wine",     NULL,       NULL,       0,						1,           -1 },
-	{ "anbox",    NULL,       NULL,       0,						1,           -1 },
+	//{ "anbox",    NULL,       NULL,       0,						1,           -1 },
 	{ "Genymotion Player",    NULL,       NULL,         0,						1,           -1 },
 };
 

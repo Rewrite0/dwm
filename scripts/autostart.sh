@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mkdir /tmp/log
+mkdir /tmp/trash
 
 $DWMHOME/dwmBar/dwm_bar.sh &
 $DWMHOME/show-display.sh
