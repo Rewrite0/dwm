@@ -220,7 +220,7 @@ static Key keys[] = {
   { Mod1Mask,            XK_bracketleft,   spawn,         SHCMD("$DWM/config/set_vol.sh down") },
 
   /* super shift a    | 截图                   */
-  { MODKEY|ShiftMask,    XK_a,             spawn,         SHCMD("flameshot gui -c -p ~/Desktop/screenshots") },
+  { MODKEY|ShiftMask,    XK_a,             spawn,         SHCMD("flameshot gui") },
 
   /* super shift q    | 选中某个窗口并强制kill */
   { MODKEY|ShiftMask,    XK_q,             spawn,         SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") },
