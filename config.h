@@ -128,8 +128,6 @@ static Key keys[] = {
 
   { MODKEY,                XK_Tab,          focusstack,       {.i = +1} },               /* super tab          |  本tag内切换聚焦窗口 */
   { MODKEY|ShiftMask,      XK_Tab,          focusstack,       {.i = -1} },               /* super shift tab    |  本tag内切换聚焦窗口 */
-  { MODKEY,                XK_Up,           focusstack,       {.i = -1} },               /* super up           |  本tag内切换聚焦窗口 */
-  { MODKEY,                XK_Down,         focusstack,       {.i = +1} },               /* super down         |  本tag内切换聚焦窗口 */
 
   { MODKEY,                XK_Left,         viewtoleft,       {0} },                     /* super left         |  聚焦到左边的tag */
   { MODKEY,                XK_Right,        viewtoright,      {0} },                     /* super right        |  聚焦到右边的tag */
@@ -148,6 +146,7 @@ static Key keys[] = {
 
   { MODKEY,                XK_t,            togglefloating,   {0} },                     /* super t            |  开启/关闭 聚焦目标的float模式 */
   { MODKEY|ShiftMask,      XK_t,            toggleallfloating,{0} },                     /* super shift t      |  开启/关闭 全部目标的float模式 */
+
   { MODKEY,                XK_f,            fullscreen,       {0} },                     /* super f            |  开启/关闭 全屏 */
   { MODKEY|ShiftMask,      XK_f,            togglebar,        {0} },                     /* super shift f      |  开启/关闭 状态栏 */
   { MODKEY,                XK_g,            toggleglobal,     {0} },                     /* super g            |  开启/关闭 全局 */
@@ -236,7 +235,7 @@ static Key keys[] = {
   TAGKEYS(XK_m, 5, "~/scripts/music_player.sh")
   TAGKEYS(XK_0, 6, "linuxqq")
   TAGKEYS(XK_w, 7, "wechat")
-  TAGKEYS(XK_y, 8, "wechat-devtools")
+  TAGKEYS(XK_d, 8, "wechat-devtools")
 };
 
 static Button buttons[] = {
