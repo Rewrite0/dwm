@@ -44,7 +44,7 @@ static const unsigned int alphas[][3]    = {          /* 透明度设置 ColFg, 
 };
 
 /* 自定义脚本位置 */
-static const char *autostartscript = "$DWM/autostart.sh";
+static const char *autostartscript = "$DWM/config/autostart.sh";
 static const char *statusbarscript = "$DWM/statusbar/statusbar.sh";
 
 /* 自定义 scratchpad instance */
@@ -124,7 +124,7 @@ static const Layout layouts[] = {
 
 static Key keys[] = {
   /* modifier              key              function          argument */
-  { MODKEY,                XK_equal,        togglesystray,    {0} },                     /* super +            |  切换 托盘栏显示状态 */
+  { MODKEY,                XK_equal,        togglesystray,    {0} },                     /* super =            |  切换 托盘栏显示状态 */
 
   { MODKEY,                XK_Tab,          focusstack,       {.i = +1} },               /* super tab          |  本tag内切换聚焦窗口 */
   { MODKEY|ShiftMask,      XK_Tab,          focusstack,       {.i = -1} },               /* super shift tab    |  本tag内切换聚焦窗口 */
@@ -153,12 +153,12 @@ static Key keys[] = {
   { MODKEY,                XK_u,            toggleborder,     {0} },                     /* super u            |  开启/关闭 边框 */
   { MODKEY,                XK_n,            incnmaster,       {.i = +1} },               /* super n            |  改变主工作区窗口数量 (1 2中切换) */
 
-  { Mod1Mask,              XK_o,            focusmon,         {.i = +1} },               /* alt o              |  光标移动到另一个显示器 */
-  { Mod1Mask|ShiftMask,    XK_o,            tagmon,           {.i = +1} },               /* alt shift o        |  将聚焦窗口移动到另一个显示器 */
+  { MODKEY,                XK_p,            focusmon,         {.i = +1} },               /* super p              |  光标移动到另一个显示器 */
+  { MODKEY|ShiftMask,      XK_p,            tagmon,           {.i = +1} },               /* super shift p        |  将聚焦窗口移动到另一个显示器 */
 
-  { Mod1Mask,              XK_q,            killclient,       {0} },                     /* alt q              |  关闭窗口 */
-  { Mod1Mask|ControlMask,  XK_q,            forcekillclient,  {0} },                     /* alt ctrl q         |  强制关闭窗口(处理某些情况下无法销毁的窗口) */
-  { Mod1Mask|ControlMask,  XK_Escape,       quit,             {0} },                     /* alt ctrl esc       |  退出dwm */
+  { MODKEY,                XK_q,            killclient,       {0} },                     /* super q              |  关闭窗口 */
+  { MODKEY|ControlMask,    XK_q,            forcekillclient,  {0} },                     /* super ctrl q         |  强制关闭窗口(处理某些情况下无法销毁的窗口) */
+  { MODKEY|ControlMask,    XK_Escape,       quit,             {0} },                     /* super ctrl esc       |  退出dwm */
 
   { MODKEY|ShiftMask,      XK_space,        selectlayout,     {.v = &layouts[1]} },      /* super shift space  |  切换到网格布局 */
   { MODKEY,                XK_o,            showonlyorall,    {0} },                     /* super o            |  切换 只显示一个窗口 / 全部显示 */
@@ -181,21 +181,19 @@ static Key keys[] = {
   { MODKEY,                XK_j,            focusdir,         {.i = DOWN } },            /* super j            | 二维聚焦窗口 */
   { MODKEY,                XK_h,            focusdir,         {.i = LEFT } },            /* super h            | 二维聚焦窗口 */
   { MODKEY,                XK_l,            focusdir,         {.i = RIGHT } },           /* super l            | 二维聚焦窗口 */
-  { MODKEY|ShiftMask,      XK_k,            exchange_client,  {.i = UP } },              /* super shift k      | 二维交换窗口 (仅平铺) */
-  { MODKEY|ShiftMask,      XK_j,            exchange_client,  {.i = DOWN } },            /* super shift j      | 二维交换窗口 (仅平铺) */
-  { MODKEY|ShiftMask,      XK_h,            exchange_client,  {.i = LEFT} },             /* super shift h      | 二维交换窗口 (仅平铺) */
-  { MODKEY|ShiftMask,      XK_l,            exchange_client,  {.i = RIGHT } },           /* super shift l      | 二维交换窗口 (仅平铺) */
+
+  { MODKEY|ShiftMask,       XK_k,           exchange_client,  {.i = UP } },              /* super shift k      | 二维交换窗口 (仅平铺) */
+  { MODKEY|ShiftMask,       XK_j,           exchange_client,  {.i = DOWN } },            /* super shift j      | 二维交换窗口 (仅平铺) */
+  { MODKEY|ShiftMask,       XK_h,           exchange_client,  {.i = LEFT} },             /* super shift h      | 二维交换窗口 (仅平铺) */
+  { MODKEY|ShiftMask,       XK_l,           exchange_client,  {.i = RIGHT } },           /* super shift l      | 二维交换窗口 (仅平铺) */
 
   /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
 
-  /* alt esc          | 打开scratch终端        */
-  { Mod1Mask,            XK_Escape,        togglescratch, SHCMD("st -t scratchpad -c float") },
+  /* super esc          | 打开scratch终端        */
+  { MODKEY,              XK_Escape,        togglescratch, SHCMD("st -t scratchpad -c float") },
 
-  /* alt enter        | 打开st终端             */
-  { Mod1Mask,            XK_Return,        spawn,         SHCMD("st") },
-
-  /* super enter      | 打开全局st终端         */
-  { MODKEY,              XK_Return,        spawn,         SHCMD("st -c FG") },
+  /* super enter        | 打开st终端             */
+  { MODKEY,              XK_Return,        spawn,         SHCMD("kitty") },
 
   /* super space      | 打开浮动st终端         */
   { MODKEY,              XK_space,         spawn,         SHCMD("st -c float") },
@@ -203,20 +201,20 @@ static Key keys[] = {
   /* super e          | 打开/关闭nautilus       */
   { MODKEY,              XK_e,             spawn,         SHCMD("killall nautilus || nautilus") },
 
-  /* alt shift enter  | rofi: 执行run          */
-  { Mod1Mask|ShiftMask,  XK_Return,        spawn,         SHCMD("rofi -show run") },
+  /* super shift enter  | rofi: 执行run          */
+  { MODKEY|ShiftMask,     XK_Return,        spawn,         SHCMD("rofi -show run") },
 
   /* super p          | rofi: 执行自定义脚本   */
   { MODKEY,              XK_p,             spawn,         SHCMD("$DWM/config/rofi.sh") },
 
-  /* ctrl alt l       | 锁定屏幕               */
-  { Mod1Mask|ControlMask,    XK_l,         spawn,         SHCMD("slock") },
+  /* super s       | 锁定屏幕               */
+  { MODKEY,              XK_s,             spawn,         SHCMD("slock") },
 
-  /* alt ]          | 音量加                 */
-  { Mod1Mask,            XK_bracketright,  spawn,         SHCMD("$DWM/config/set_vol.sh up") },
+  /* super ]          | 音量加                 */
+  { MODKEY,              XK_bracketright,  spawn,         SHCMD("$DWM/config/set_vol.sh up") },
 
-  /* alt [          | 音量减                 */
-  { Mod1Mask,            XK_bracketleft,   spawn,         SHCMD("$DWM/config/set_vol.sh down") },
+  /* super [          | 音量减                 */
+  { MODKEY,              XK_bracketleft,   spawn,         SHCMD("$DWM/config/set_vol.sh down") },
 
   /* super shift a    | 截图                   */
   { MODKEY|ShiftMask,    XK_a,             spawn,         SHCMD("flameshot gui") },
