@@ -150,11 +150,11 @@ static Key keys[] = {
   { MODKEY,                XK_f,            fullscreen,       {0} },                     /* super f            |  开启/关闭 全屏 */
   { MODKEY|ShiftMask,      XK_f,            togglebar,        {0} },                     /* super shift f      |  开启/关闭 状态栏 */
   { MODKEY,                XK_g,            toggleglobal,     {0} },                     /* super g            |  开启/关闭 全局 */
-  { MODKEY,                XK_u,            toggleborder,     {0} },                     /* super u            |  开启/关闭 边框 */
+  { MODKEY,                XK_b,            toggleborder,     {0} },                     /* super b            |  开启/关闭 边框 */
   { MODKEY,                XK_n,            incnmaster,       {.i = +1} },               /* super n            |  改变主工作区窗口数量 (1 2中切换) */
 
-  { MODKEY,                XK_p,            focusmon,         {.i = +1} },               /* super p              |  光标移动到另一个显示器 */
-  { MODKEY|ShiftMask,      XK_p,            tagmon,           {.i = +1} },               /* super shift p        |  将聚焦窗口移动到另一个显示器 */
+  { MODKEY,                XK_u,            focusmon,         {.i = +1} },               /* super u              |  光标移动到另一个显示器 */
+  { MODKEY|ShiftMask,      XK_u,            tagmon,           {.i = +1} },               /* super shift u        |  将聚焦窗口移动到另一个显示器 */
 
   { MODKEY,                XK_q,            killclient,       {0} },                     /* super q              |  关闭窗口 */
   { MODKEY|ControlMask,    XK_q,            forcekillclient,  {0} },                     /* super ctrl q         |  强制关闭窗口(处理某些情况下无法销毁的窗口) */
