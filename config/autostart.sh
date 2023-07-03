@@ -19,7 +19,7 @@ settings() {
 
 daemons() {
 	[ $1 ] && sleep $1
-	$_thisdir/statusbar/statusbar.sh cron &                  # 开启状态栏定时更新
+	$DWM/statusbar/statusbar.sh cron &                  # 开启状态栏定时更新
 	picom --config $DWM/config/picom.conf >>/dev/null 2>&1 & # 开启picom
 	dunst &                                                  # 开启通知server
 	fcitx5 &                                                 # 开启输入法
