@@ -14,7 +14,8 @@ settings() {
 	# syndaemon -i 1 -t -K -R -d # 设置使用键盘时触控板短暂失效
 	$DWM/config/set_screen.sh two # 设置显示器
 	# 1h 息屏
-	xset s 3600 3600
+  xset dpms 3600 3600 3600
+  xset s 3600 3600
 }
 
 daemons() {
